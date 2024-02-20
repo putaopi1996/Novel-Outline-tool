@@ -1,0 +1,704 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>网络小说大纲写作模板</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  <style>
+    body {
+      font-family: "SimHei", "PMingLiU", "Helvetica", "sans-serif";
+      background-color: #f8f9fa;
+      font-size: 13px;
+      color: #656565;
+    }
+    .bg-light {
+      background-color: #ffffff!important;
+    }
+    .navbar-light .navbar-brand,
+    .navbar-light .navbar-brand:hover {
+      color: #ff5754;
+    }
+    .highlight {
+      color: #ff5754;
+    }
+    .write-content,
+    .about-me-content,
+    .login-content {
+      margin-top: 12px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      background-color: #ffffff;
+      webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    .form-control {
+      font-size: 13px;
+    }
+    .form-control:focus {
+      border-color: #ffb6b4;
+      box-shadow: 0 0 0 1px #ffb6b4;
+    }
+    .form-group textarea,
+    textarea.form-control {
+      resize: none;
+    }
+    .ui-widget {
+      font-size: 12px;
+    }
+    .ui-state-active, 
+    .ui-widget-content .ui-state-active, 
+    .ui-widget-header .ui-state-active, 
+    a.ui-button:active, .ui-button:active, 
+    .ui-button.ui-state-active:hover {
+      border: 1px solid #faeded;
+      background: #ff7e7e;
+    }
+    .ui-visual-focus{
+      box-shadow:0 0 3px 1px #fff;
+    }
+    .header-btm {
+      height: 1px;
+      background-color: #000;
+      opacity: .12;
+      z-index: 990;
+      -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.8);
+      box-shadow: 0 1px 3px rgba(0,0,0,.8);
+    }
+    .btn-outline-danger {
+      color: #ff5754;
+      border-color: #ff5754;
+      border-top-color: rgb(220, 53, 69);
+      border-right-color: rgb(220, 53, 69);
+      border-bottom-color: rgb(220, 53, 69);
+      border-left-color: rgb(220, 53, 69);
+    }
+    footer {
+      margin-top: 40px;
+      background-color: #fff;
+      webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+    .footer-content {
+      padding: 20px 0px 20px 0px;
+      color: #ff5754;
+      text-align: center;
+      font-size: 12px;
+    }
+    a {
+      color: #ff5754;
+    }
+    a:hover {
+      color: #ff0c08;
+    }
+    .close {
+      color: #ff0c08;
+    }
+    .about-me-content {
+      display: none;
+    }
+    .about-me-content span {
+      font-size: 14px;
+    }
+    .about-me-img {
+      width: 200px;
+    }
+    .close {
+      font-size: 22px;
+    }
+    #taAll {
+      position: absolute;
+      left: -1000px;
+      top: -1000px;
+    }
+    /*
+     * 夜间模式
+     */
+    .dark a {
+      color: #ff006e;
+    }
+    .dark a:hover {
+      color: #ff006e;
+    }
+    .dark {
+      background-color: #16151a;
+      color: #fff;
+    }
+    .dark .highlight {
+      color: #ff006e;
+    }
+    .dark .bg-light, .dark footer {
+      background-color: #24232a!important;
+    }
+    .dark .navbar-light .navbar-brand, .dark .navbar-light .navbar-brand:hover {
+      color: #ff006e;
+    }
+    .dark .write-content,
+    .dark .about-me-content,
+    .dark .login-content {
+      background-color: #24232a!important;
+    }
+    .dark textarea {
+      color: #fff;
+      background-color: #24232a;
+      border: 1px solid #555262;
+    }
+    .dark .form-text.text-muted {
+      color: #fff!important;
+    }
+    .dark .form-control:focus {
+      color: #fff;
+      background-color: #302f37;
+      border-color: #ff006e;
+      box-shadow: 0 0 0 0px #ff006e;
+    }
+    .dark widget-content .ui-state-default, 
+    .dark .ui-widget-header .ui-state-default, 
+    .dark .ui-button, 
+    .dark html .ui-button.ui-state-disabled:hover, 
+    .dark html .ui-button.ui-state-disabled:active {
+      color: #fff;
+      background-color: #24232a;
+      border: 1px solid #555262;
+    }
+    .dark .ui-state-active,
+    .dark .ui-widget-content .ui-state-active,
+    .dark .ui-widget-header .ui-state-active,
+    .dark a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+      color: #fff;
+      background-color: #ff006e;
+      border: 1px solid #ff7cb4;
+    }
+    .dark .ui-visual-focus{
+      box-shadow:0 0 3px 1px #ff006e;
+    }
+    .dark .footer-content {
+      color: #ff006e;
+    }
+    .dark .btn-outline-danger {
+      color: #ff006e;
+      border-color: #ff006e;
+    }
+    .dark .btn-outline-danger:hover {
+      color: #fff;
+      background-color: #ff006e;
+      border-color: #ff7cb4;
+    }
+    .dark .close {
+      color: #ff006e;
+      text-shadow: none;
+      opacity: 1;
+    }
+    .dark hr {
+      border-top: 1px solid #555262;
+    }
+  </style>
+  <script>
+  var ui = {}
+  // 
+  var datas = {
+    startGenre: ['重生', '穿越', '无限', '回炉', '送菜', '神豪', '陨落', '闯关', '夺舍', '废柴', '创世', '幕后', '玩家'],
+    classicPlots: ['升级', '救美', '护短', '采药', '夺宝', '炼丹', '铸造', '组队', '结盟', '结仇', '反抢', '踏人', '助人', '体悟', '副本', '反杀', '比武', '送礼', '寿宴', '开山立派', '生子', '满月', '拜师', '宴会', '冷嘲热讽', '误会', '仇恨', '爆发', '大难不死', '神明附体', '外星人眷顾', '杀父之仇', '灭门之痛', '胯下之辱', '种族仇恨', '越阶杀敌', '退婚', '夺爱', '羞辱'],
+    masterPlots: ['探寻', '探险', '追逐', '解救', '逃跑', '复仇', '推理故事', '对手戏', '落魄之人', '诱惑', '变形计', '转变', '成长', '爱情故事', '不伦之恋', '牺牲', '自我发现之旅', '可悲的无节制行为', '盛衰沉浮'],
+    DramaticSituations: ['哀求脱罪', '救人离祸', '伐罪复仇', '亲族仇怨', '逃离冤罪', '天灾人祸', '落于灾殃', '诛国一夫', '立业奠基', '押人为质', '不解之事', '事物之得', '亲族之恨', '亲族之争', '引杀之姦', '人之狂狷', '致死轻率', '爱之瞽罪', '杀亲不知', '捨身为道', '为亲牺牲', '为情皆舍', '必舍所爱', '上下之争', '不伦通姦', '爱生之罪', '所爱之耻', '情爱之障', '所爱之敌', '所图之物', '与神争胜', '有误之妒', '有误决断', '悔恨所为', '复得所爱', '失其所爱'],
+    speed: ['人物成长', '情感发展', '仇恨完结', '目标完成', '探索新世界'],
+    desire: ['秘笈', '装备', '法宝', '武器', '粮食', '权力', '男神', '女神', '队友', '丹药', '道具', '新线索', '新地图', '亲情', '报恩', '报仇', '革命', '壮举', '凶兽', '功法', '材料', '仙术', '上古遗物', '异能', '智能电脑', '种族异禀'],
+    excite: ['先仰后扬', '扮猪吃虎', '读者的收集癖', '装备法宝', '收获女神', '收获男神', '成长', '晋级', '优越感', '送菜', '集体荣誉感', '补违', '不可能任务', '意料之外的额外收获', '满分法', '突破极限', '创新道路', '谈判成功', '交易成功'],
+    character: ['医生', '杀手', '特种兵', '雇佣兵', '警察', '法医', '主播', '料理师', '咖啡师', '佣兵', '王爷', '皇上', '大将军'],
+    taboo: ['亲友背叛', '女主失贞', '出轨', '主角受辱', '出人意料的挫折', '大乱斗', '多主角', '恶搞', '恶趣味', '突破道德底线'],
+    scene: ['家族', '学院', '基地', '坊市', '拍卖行', '任务中心', '大街', '酒楼', '郊外', '山脉'],
+    line: ['主角性格智慧', '配角', '知识', '技能', '伙伴', '装备', '冒险', '身世', '势力', '后宫'],
+    loveStoryStructure:['麻雀变凤凰','柔情化冰心','患难见真情','报仇雪恨型','情妇孽缘型','花花公子型'],
+    loveStoryExcite :['残疾','重病','超能力','人格分裂','失忆','心理不正常','童年创伤','酒后抓狂','女人过敏症','毒性免疫','非人类种族','坐牢','国仇家恨'],
+    sevenPoints :['奇遇','升级','泡妞','寻宝','发财','欺人','助人'],
+  };
+  // 
+  var datas2 = {
+    selStratGenre: {title: '开篇手法', dataKey: 'startGenre'},
+    selClassicPlots: {title: '网文情节', dataKey: 'classicPlots'},
+    selMasterPlots: {title: '电影情节', dataKey: 'masterPlots'},
+    selDramaticSituations: {title: '三十六剧', dataKey: 'DramaticSituations'},
+    selSpeed: {title: '发展节奏', dataKey: 'speed'},
+    selDesire: {title: '收获（知识、财富、享乐、权力）', dataKey: 'desire'},
+    selExcite: {title: '爽点', dataKey: 'excite'},
+    selCharacter: {title: '人物（特殊职业 / 讨喜性格）', dataKey: 'character'},
+    selTaboo: {title: '禁忌（要好好掌握才能写）', dataKey: 'taboo'},
+    selScene: {title: '舞台场景', dataKey: 'scene'},
+    line: {title: '9线展开', dataKey: 'line'},
+    loveStoryStructure: {title: '言情小说的形', dataKey: 'loveStoryStructure'},
+    loveStoryExcite: {title: '言情小说的刺', dataKey: 'loveStoryExcite'},
+    sevenPoints: {title: '七要素党', dataKey: 'sevenPoints'}
+  }
+
+  function initUI() {
+    ui.tvYear = $('.year')
+    ui.alAboutMe = $('.aboutMe');
+    ui.divAboutMeContent = $('.about-me-content');
+    ui.input = $("input")
+    ui.content2 = $("#content2");
+    ui.btnClean = $("#btnClean");
+    ui.btnStyle = $('#btnStyle');
+    ui.btnCopy = $('#btnCopy');
+    ui.alClose = $(".close");
+    ui.body = $("body");
+
+    ui.taBookName = $("#taBookName");
+    ui.taBookDescription = $("#taBookDescription");
+    ui.taBookInnovation = $("#taBookInnovation");
+
+    ui.taCharacter1 = $("#taCharacter1");
+    ui.taCharacter2 = $("#taCharacter2");
+    ui.taCharacter3 = $("#taCharacter3");
+
+    ui.taSetting1 = $("#taSetting1");
+    ui.taSetting2 = $("#taSetting2");
+    ui.taSetting3 = $("#taSetting3");
+
+    ui.taOutline1 = $("#taOutline1");
+    ui.taOutline2 = $("#taOutline2");
+    ui.taOutline3 = $("#taOutline3");
+    ui.taOutline4 = $("#taOutline4");
+
+    ui.taOutline5 = $("#taOutline5");
+    ui.taOutline6 = $("#taOutline6");
+    ui.taOutline7 = $("#taOutline7");
+    ui.taOutline8 = $("#taOutline8");
+
+    ui.taSummary = $('#taSummary');
+    ui.taAll = $('#taAll');
+
+    ui.imgAboutMe = $('.about-me-img');
+  }
+
+  $(function(){
+    initUI();
+
+    var host = window.location.host;
+    if (!host)
+      host = 'https://chankuang2008.github.io/novel-tool/';
+    else
+      host = 'https://'+host+'/novel-tool/'
+
+    var urlImg = host+'img/2062009398_meitu_1.jpg';
+    ui.imgAboutMe.attr('src', urlImg);
+
+    // 多项选择
+    for (var k in datas2) {
+      renderRowSelector(k, datas2[k].title);
+      renderMultiSelector(ui[k], datas2[k].dataKey);
+    }
+
+    // 文字框
+    renderLocalStorage(ui.taBookName, '书名');
+    renderLocalStorage(ui.taBookDescription, '简介');
+    renderLocalStorage(ui.taBookInnovation, '创新点子');
+
+    renderLocalStorage(ui.taCharacter1, '1号女猪脚');
+    renderLocalStorage(ui.taCharacter2, '1号男猪脚');
+    renderLocalStorage(ui.taCharacter3, '炮灰配脚');
+
+    renderLocalStorage(ui.taSetting1, '世界观');
+    renderLocalStorage(ui.taSetting2, '升级系统');
+    renderLocalStorage(ui.taSetting3, '目标');
+
+    renderLocalStorage(ui.taOutline1, '细纲1');
+    renderLocalStorage(ui.taOutline2, '细纲2');
+    renderLocalStorage(ui.taOutline3, '细纲3');
+    renderLocalStorage(ui.taOutline4, '细纲4');
+
+    renderLocalStorage(ui.taOutline5, '细纲5');
+    renderLocalStorage(ui.taOutline6, '细纲6');
+    renderLocalStorage(ui.taOutline7, '细纲7');
+    renderLocalStorage(ui.taOutline8, '细纲8');
+
+    renderLocalStorage(ui.taSummary, '总结');   
+
+    // 剪贴板
+    copyToClipboard();
+    ui.btnCopy.click(function () {
+      try {
+        ui.taAll.select();
+        ui.taAll.setSelectionRange(0, 99999);
+      }catch{
+
+      }
+      document.execCommand("copy");
+    });
+
+    // 清理 
+    ui.btnClean.click(function() {
+      localStorage.clear();
+      location.reload();
+    });
+
+    // 页尾
+    ui.tvYear.text(new Date().getFullYear().toString());
+
+    // 自介
+    ui.alAboutMe.click(function() {
+      ui.divAboutMeContent.toggle();
+      ui.body.animate({ scrollTop: 0 }, "slow");
+    });
+    ui.alClose.click(function() {
+      ui.divAboutMeContent.toggle();
+    });
+
+    // 主题
+    ui.btnStyle.text("夜间模式");
+    var style = localStorage.getItem('样式');
+    if (style=='夜间') {
+      ui.body.addClass('dark');
+      ui.btnStyle.text("白天模式");
+    }
+    else if (style=='白天') {
+      ui.body.removeClass('dark');
+      ui.btnStyle.text("夜间模式");
+    }
+    else if (!style) {
+      ui.btnStyle.text("夜间模式");
+      style='夜间';
+      ui.body.removeClass('dark')
+      localStorage.setItem('样式', '白天');
+    }
+
+    ui.btnStyle.click(function() {
+      if (style=='夜间') {
+        ui.btnStyle.text("白天模式");
+        ui.body.removeClass('dark');
+        localStorage.setItem('样式', '白天');
+        style = localStorage.getItem('样式');
+      }
+      else if (style=='白天') {
+        ui.btnStyle.text("夜间模式");
+        ui.body.addClass('dark')
+        localStorage.setItem('样式', '夜间');
+        style = localStorage.getItem('样式');
+      }
+    });
+
+
+  });
+
+  function renderRowSelector(id, title) {
+    // 渲染
+    var html = '<div class="row mb-4"><div class="col-12 col-sm-12"><div class="mb-2">'+title+'</div><fieldset id="'+id+'"></fieldset></div></div>';
+    ui.content2.append(html);
+    ui[id] = $('#'+id)
+  }
+
+  function renderMultiSelector(div, key) {
+    for (var i in datas[key]) {
+      var v = datas[key][i];
+      var n = key+'-'+i
+      // 渲染
+      div.append('<label for="'+n+'">'+v+'</label> <input type="checkbox" name="'+n+'" id="'+n+'" data-value="'+v+'">');
+
+      // 视图
+      if (!(key in ui)) {ui[key] = []};
+      ui[key].push($('#'+n));
+
+      // 刷新组件
+      var cur = ui[key].slice(-1)[0];
+      cur.checkboxradio({icon: false});
+
+      // 是否已点选
+      if (localStorage.getItem(v) == 'true')
+        cur.click();
+
+      // 绑定事件
+      cur.click(function () {
+        var v2 = $(this).data("value"), [key2, id2] = this.id.split("-");
+        var v3 = localStorage.getItem(v2);
+        // 点选
+        if (v3 === null)
+          localStorage.setItem(v2, true);
+        // 点选
+        else if (v3 == 'true')
+          localStorage.setItem(v2, false);
+        // 剔除
+        else if (v3 == 'false')
+          localStorage.setItem(v2, true);
+      });
+    }
+  }
+
+  function renderLocalStorage(div, key) {
+    // 渲染
+    var v4 = localStorage.getItem(key);
+    if (!(v4 === null))
+      div.text(v4);
+    // 绑定事件
+    div.on('input',function() {
+      // 储存
+      localStorage.setItem(key, $(this).val());
+      // 复制到剪贴板
+      copyToClipboard();
+    });
+  }
+
+  function copyToClipboard() {
+    var arr = ['书名', '简介', '创新点子', '1号女猪脚', '1号男猪脚', '炮灰配脚', '世界观', '升级系统', '目标', 
+               '细纲1', '细纲2', '细纲3', '细纲4', '细纲5', '细纲6', '细纲7', '细纲8', '总结'];
+    var body = '';
+    for (var v of arr) {
+      var v1 = localStorage.getItem(v);
+      if (v1)
+        body += v+'\r'+v1+'\r\r';
+    }
+    ui.taAll.html(body);
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="javascript:void(0)">网络小说大纲写作模板</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-sm btn-outline-danger my-2 mr-3 my-sm-0" type="button" id="btnCopy">复制到剪贴板</button>
+          <button class="btn btn-sm btn-outline-danger my-2 mr-3 my-sm-0" type="button" id="btnStyle"></button>
+          <button class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="button" id="btnClean">清除</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header-btm"></div>
+
+  <div class="container about-me-content">
+    <div class="row">
+      <div class="col-12 col-sm-12">
+        <span>关於我</span>
+        <a href="javascript:void(0);" class="close">「关闭」</a>
+        <div class="mb-2"></div> 
+        <img class="about-me-img" src="" class="rounded float-left" alt="照骗"> <br />
+        姓名：匡匡稻 <br />
+        年龄：90后的大龄剩货 <br />
+        工作：金融科技 <br />
+        地区：深圳 <br />
+        鹅号：571287855 <br />
+        PS: <span class="highlight">照骗</span>是大学时<span class="highlight">Cosplay</span>时拍的，与现实本人<span class="highlight">不符合</span>！<br />
+      </div>
+    </div>
+  </div>
+
+  <div class="container write-content">
+
+    <div class="row">
+    <div class="col-12 col-sm-12">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="character1">书名</label>
+            <textarea class="form-control" id="taBookName" rows="5"></textarea>
+            <small class="form-text text-muted">
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">简介</label>
+            <textarea class="form-control" id="taBookDescription" rows="5"></textarea>
+            <small class="form-text text-muted">
+              背景、主要人物形象、金手指、冲突、悬念
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">创新点子</label>
+            <textarea class="form-control" id="taBookInnovation" rows="5"></textarea>
+            <small class="form-text text-muted">
+              <span class="highlight">打动责编</span>的亮点
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-12 col-sm-12">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="character1">1号女猪脚</label>
+            <textarea class="form-control" id="taCharacter1" rows="5"></textarea>
+            <small class="form-text text-muted">
+              主角是个xx的人，因为xx，他在xx领域超强，他会靠他的能力完成xx，虽然其中会出现xx和xx的困难。
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">1号男猪脚</label>
+            <textarea class="form-control" id="taCharacter2" rows="5"></textarea>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">炮灰配脚 / 队友 / 反派</label>
+            <textarea class="form-control" id="taCharacter3" rows="5"></textarea>
+            <small class="form-text text-muted">
+              <span class="highlight">正面</span>：导师型、爱慕型、协助型<br />
+              <span class="highlight">不确定</span>：神秘型、竞争型、丑角型<br />
+              <span class="highlight">负面</span>：陷害型
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-12 col-sm-12">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="character1">世界观</label>
+            <textarea class="form-control" id="taSetting1" rows="5"></textarea>
+            <small class="form-text text-muted">
+              <span class="highlight">主打卖点</span>、特色<br />
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">升级系统 / 主神系统 / 金手指</label>
+            <textarea class="form-control" id="taSetting2" rows="5"></textarea>
+            <small class="form-text text-muted">
+              <span class="highlight">金手指</span>：宝物、技能、先天、知识<br />
+              初始条件：运气好、师承家世好、天赋高<br />
+              哪<span class="highlight">领域</span>强：金融、经商、武功<br />
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="character2">主线 / 目标 / 副本</label>
+            <textarea class="form-control" id="taSetting3" rows="5"></textarea>
+            <small class="form-text text-muted">
+              伏笔：<br />
+              长目标：6w字。中目标：3w字。短目标：1w字。<br />
+              主线任务，支线任务，副本。
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div id="content2"></div>
+
+    <div class="row">
+    <div class="col-12 col-sm-12">
+      <hr />
+      <div class="mb-2">开局细纲：主角、主线、伏笔、开场 （细纲20字以内）</div>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="character1">细纲1</label>
+            <textarea class="form-control" id="taOutline1" rows="1"></textarea>
+            <small class="form-text text-muted">
+              矛盾、对比（如：家破人亡、被人欺凌，资质测试、家族不待见）<br />
+              刷主角存在感（如：YY设置）<br />
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲2</label>
+            <textarea class="form-control" id="taOutline2" rows="1"></textarea>
+            <small class="form-text text-muted">
+              对手、困境、阻碍、伏笔
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲3</label>
+            <textarea class="form-control" id="taOutline3" rows="1"></textarea>
+            <small class="form-text text-muted">
+              背景、短期目标、冲突、小高潮<br />
+              强化主角属性
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲4</label>
+            <textarea class="form-control" id="taOutline4" rows="1"></textarea>
+            <small class="form-text text-muted">
+              主角奇遇
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-12 col-sm-12">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="character1">细纲5</label>
+            <textarea class="form-control" id="taOutline5" rows="1"></textarea>
+            <small class="form-text text-muted">
+
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲6</label>
+            <textarea class="form-control" id="taOutline6" rows="1"></textarea>
+            <small class="form-text text-muted">
+
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲7</label>
+            <textarea class="form-control" id="taOutline7" rows="1"></textarea>
+            <small class="form-text text-muted">
+
+            </small>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="character2">细纲8</label>
+            <textarea class="form-control" id="taOutline8" rows="1"></textarea>
+            <small class="form-text text-muted">
+
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="col-12">
+      <hr />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 mb-2">
+      <div class="mb-2">反问：</div>
+      1. 用50字对你的故事进行概括。<br />
+      2. 故事的<span class="highlight">中心目的</span>是什麽？（问句形式）<br />
+      3. 主角的<span class="highlight">目的</span>是什麽？<br />
+      4. 主角的<span class="highlight">动机</span>是什麽？<br />
+      5. 谁或什麽<span class="highlight">阻碍</span>主角？<br />
+      6. 为了实现目的，主角制订什麽<span class="highlight">行动计划</span>？<br />
+      7. 核心<span class="highlight">冲突</span>是什麽？<br />
+      8. 主角<span class="highlight">成长</span>是什麽？<br />
+      9. 是主角还是行动为核心？<br />
+      10. 如何维持<span class="highlight">气氛</span>？<br />
+      12. 如何推至<span class="highlight">高潮</span>？<br />
+    </div>
+    <div class="col-12 col-sm-6 col-md-8">
+      <textarea class="form-control" id="taSummary" rows="12"></textarea>
+    </div>
+    </div>
+
+    <textarea class="form-control" id="taAll" rows="1"></textarea>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        @Copyright © <span class="year"></span> 匡匡稻 | <a href="javascript:void(0);" class="aboutMe">关於我</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
